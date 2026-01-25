@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { Product } from "@/lib/products";
 import { formatPrice } from "@/data/cart";
-import { useCart } from "./cart-provider";
+import { useCart } from "@/components/cart-provider";
 
 interface ProductCardProps {
   product: Product;
