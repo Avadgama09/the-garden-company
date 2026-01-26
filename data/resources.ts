@@ -1,3 +1,5 @@
+// data/resources.ts
+
 export interface Resource {
   id: string;
   slug: string;
@@ -15,6 +17,118 @@ export interface Resource {
 }
 
 export const resources: Resource[] = [
+  // ═══════════════════════════════════════════════════════════
+  // PILLARS (shown in "Start with the Fundamentals" section)
+  // ═══════════════════════════════════════════════════════════
+  {
+    id: "pillar-gardening-basics",
+    slug: "gardening-basics",
+    title: "Gardening Basics",
+    excerpt:
+      "The complete foundation for successful gardening — soil, watering, sunlight, planting, and seasonal care explained for Indian home gardeners.",
+    type: "article",
+    category: "Foundations",
+    tags: ["Pillar", "Beginner", "Fundamentals"],
+    image:
+      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
+    readTime: "15 min read",
+    publishedAt: "2026-01-26",
+    featured: true,
+  },
+  {
+    id: "pillar-plants",
+    slug: "plants",
+    title: "Plants",
+    excerpt:
+      "Explore indoor plants, outdoor plants, ornamental varieties, air-purifying options, and low-light tolerant species for every space.",
+    type: "article",
+    category: "Foundations",
+    tags: ["Pillar", "Indoor", "Outdoor"],
+    image:
+      "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=800&q=80",
+    readTime: "12 min read",
+    publishedAt: "2026-01-26",
+    featured: true,
+  },
+  {
+    id: "pillar-seeds",
+    slug: "seeds",
+    title: "Seeds",
+    excerpt:
+      "Everything about seed selection, seed starting, germination techniques, and seed saving for sustainable home gardening.",
+    type: "article",
+    category: "Foundations",
+    tags: ["Pillar", "Seeds", "Propagation"],
+    image:
+      "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80",
+    readTime: "10 min read",
+    publishedAt: "2026-01-26",
+    featured: true,
+  },
+  {
+    id: "pillar-flowers-and-foliage",
+    slug: "flowers-and-foliage",
+    title: "Flowers & Foliage",
+    excerpt:
+      "Grow beautiful annual flowers, perennials, flowering shrubs, foliage plants, and bulbs for year-round colour in your garden.",
+    type: "article",
+    category: "Foundations",
+    tags: ["Pillar", "Flowers", "Foliage"],
+    image:
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80",
+    readTime: "12 min read",
+    publishedAt: "2026-01-26",
+    featured: true,
+  },
+  {
+    id: "pillar-fruits-and-vegetables",
+    slug: "fruits-and-vegetables",
+    title: "Fruits & Vegetables",
+    excerpt:
+      "Grow your own food — kitchen gardens, leafy greens, root vegetables, fruit trees, and vegetable gardening guides for Indian climates.",
+    type: "article",
+    category: "Foundations",
+    tags: ["Pillar", "Edibles", "Kitchen Garden"],
+    image:
+      "https://images.unsplash.com/photo-1592921870789-04563d55041c?w=800&q=80",
+    readTime: "14 min read",
+    publishedAt: "2026-01-26",
+    featured: true,
+  },
+  {
+    id: "pillar-plant-problems",
+    slug: "plant-problems",
+    title: "Plant Problems",
+    excerpt:
+      "Identify and solve common plant issues — pest control, disease identification, nutrient deficiencies, and plant stress management.",
+    type: "article",
+    category: "Foundations",
+    tags: ["Pillar", "Troubleshooting", "Pests"],
+    image:
+      "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80",
+    readTime: "11 min read",
+    publishedAt: "2026-01-26",
+    featured: true,
+  },
+  {
+    id: "pillar-controlled-environment-farming",
+    slug: "controlled-environment-farming",
+    title: "Controlled Environment Farming",
+    excerpt:
+      "Modern growing methods — hydroponics, aeroponics, aquaponics, vertical farming, grow lights, and smart gardening technologies.",
+    type: "article",
+    category: "Foundations",
+    tags: ["Pillar", "Hydroponics", "Technology"],
+    image:
+      "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80",
+    readTime: "13 min read",
+    publishedAt: "2026-01-26",
+    featured: true,
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // REGULAR CONTENT (shown in filtered blog grid below)
+  // ═══════════════════════════════════════════════════════════
   {
     id: "1",
     slug: "beginners-guide-indoor-plants",
@@ -142,4 +256,8 @@ export const getFeaturedResources = (): Resource[] => {
 
 export const getResourcesByType = (type: Resource["type"]): Resource[] => {
   return resources.filter((r) => r.type === type);
+};
+
+export const getPillarResources = (): Resource[] => {
+  return resources.filter((r) => r.tags.includes("Pillar"));
 };

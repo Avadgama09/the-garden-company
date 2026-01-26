@@ -1,16 +1,24 @@
+// app/resources/page.tsx
+
 "use client";
 
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { FileText, Play, Lightbulb, Search } from "lucide-react";
+import { FileText, Play, Lightbulb, Search, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { resources } from "@/data/resources";
 import { ResourceCard } from "@/components/resource-card";
 import { cn } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "./loading";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const tabs = [
   { id: "all", label: "All", icon: null },
@@ -29,119 +37,119 @@ const categories = [
 ];
 
 export default function ResourcesPage() {
-  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
+  // 🔹 Pillars (shown in carousel)
+  const pillarResources = resources.filter((r) => r.tags.includes("Pillar"));
+
+  // 🔹 Non-pillar content (shown in grid below)
+  const contentResources = resources.filter((r) => !r.tags.includes("Pillar"));
+
   const filteredResources = useMemo(() => {
-    return resources.filter((resource) => {
-      // Filter by type
-      if (activeTab !== "all" && resource.type !== activeTab) {
+    return contentResources.filter((resource) => {
+      if (activeTab !== "all" && resource.type !== activeTab) return false;
+      if (selectedCategory !== "All" && resource.category !== selectedCategory)
         return false;
-      }
-      // Filter by category
-      if (
-        selectedCategory !== "All" &&
-        resource.category !== selectedCategory
-      ) {
-        return false;
-      }
-      // Filter by search
       if (searchQuery) {
-        const query = searchQuery.toLowerCase();
+        const q = searchQuery.toLowerCase();
         return (
-          resource.title.toLowerCase().includes(query) ||
-          resource.excerpt.toLowerCase().includes(query) ||
-          resource.tags.some((tag) => tag.toLowerCase().includes(query))
+          resource.title.toLowerCase().includes(q) ||
+          resource.excerpt.toLowerCase().includes(q) ||
+          resource.tags.some((t) => t.toLowerCase().includes(q))
         );
       }
       return true;
     });
-  }, [activeTab, selectedCategory, searchQuery]);
-
-  const featuredVideos = resources.filter((r) => r.type === "video").slice(0, 2);
+  }, [activeTab, selectedCategory, searchQuery, contentResources]);
 
   return (
     <Suspense fallback={<Loading />}>
       <>
-        {/* Hero Section */}
+        {/* Hero */}
         <section className="bg-garden-sage/50 py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <motion.div
+          <div className="mx-auto max-w-7xl px-4 text-center">
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center"
+              className="font-serif text-4xl font-bold sm:text-5xl"
             >
-              <h1 className="font-serif text-4xl font-bold text-foreground sm:text-5xl">
-                Guides, Tips & Videos
-              </h1>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-                Everything you need to grow your dream garden. Expert advice,
-                step-by-step guides, and video tutorials for gardeners of all
-                levels.
-              </p>
+              Gardening Resources
+            </motion.h1>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+              Guides, pillars, and practical knowledge for home gardeners.
+            </p>
 
-              {/* Search */}
-              <div className="mx-auto mt-8 max-w-md">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                  <Input
-                    type="search"
-                    placeholder="Search articles, videos, tips..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="h-12 pl-10"
-                  />
-                </div>
-              </div>
-            </motion.div>
+            <div className="relative mx-auto mt-8 max-w-md">
+              <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search articles, videos, tips..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="h-12 pl-10"
+              />
+            </div>
           </div>
         </section>
 
-        {/* Featured Videos */}
-        {!searchQuery && activeTab === "all" && (
-          <section className="bg-garden-dark py-16">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <h2 className="mb-8 font-serif text-2xl font-bold text-garden-dark-foreground">
-                  Featured Videos
+        {/* MAIN PILLARS – CAROUSEL */}
+        <section className="bg-garden-dark py-16 md:py-20">
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="mb-8 flex items-end justify-between gap-4">
+              <div>
+                <h2 className="font-serif text-2xl font-bold text-garden-dark-foreground md:text-3xl">
+                  Start with the Fundamentals
                 </h2>
-                <div className="grid gap-6 md:grid-cols-2">
-                  {featuredVideos.map((video, index) => (
-                    <motion.div
-                      key={video.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                    >
-                      <ResourceCard resource={video} />
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+                <p className="mt-2 text-sm text-garden-dark-foreground/70 md:text-base">
+                  Deep-dive guides covering everything you need to know
+                </p>
+              </div>
             </div>
-          </section>
-        )}
 
-        {/* Main Content */}
+            {/* Carousel */}
+            <Carousel
+              opts={{
+                align: "start",
+                loop: false,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {pillarResources.map((pillar) => (
+                  <CarouselItem
+                    key={pillar.id}
+                    className="pl-4 basis-[85%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  >
+                    <ResourceCard resource={pillar} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+
+              {/* Navigation arrows - hidden on mobile, shown on md+ */}
+              <CarouselPrevious className="hidden md:flex -left-4 bg-white/90 hover:bg-white border-garden-dark-foreground/20" />
+              <CarouselNext className="hidden md:flex -right-4 bg-white/90 hover:bg-white border-garden-dark-foreground/20" />
+            </Carousel>
+
+            {/* Mobile swipe hint */}
+            <p className="mt-4 text-center text-xs text-garden-dark-foreground/60 md:hidden">
+              Swipe to see more →
+            </p>
+          </div>
+        </section>
+
+        {/* FILTERS + BLOG GRID */}
         <section className="bg-background py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4">
             {/* Tabs */}
             <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
               <div className="flex flex-wrap gap-2">
                 {tabs.map((tab) => (
                   <Button
                     key={tab.id}
-                    variant={activeTab === tab.id ? "default" : "outline"}
                     size="sm"
+                    variant={activeTab === tab.id ? "default" : "outline"}
                     onClick={() => setActiveTab(tab.id)}
                     className="gap-2"
                   >
@@ -173,19 +181,12 @@ export default function ResourcesPage() {
             {/* Results */}
             {filteredResources.length > 0 ? (
               <>
-                <p className="mb-6 text-sm text-muted-foreground">
+                <p className="mb-4 text-sm text-muted-foreground">
                   Showing {filteredResources.length} resources
                 </p>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {filteredResources.map((resource, index) => (
-                    <motion.div
-                      key={resource.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.05 }}
-                    >
-                      <ResourceCard resource={resource} />
-                    </motion.div>
+                  {filteredResources.map((resource) => (
+                    <ResourceCard key={resource.id} resource={resource} />
                   ))}
                 </div>
               </>
