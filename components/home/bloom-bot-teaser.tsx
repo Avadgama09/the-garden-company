@@ -2,29 +2,38 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Bot, Sparkles, Calendar, Bug, ShoppingCart } from "lucide-react";
+import { Bot, Sun, Leaf, FlaskConical } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-const features = [
+const tools = [
   {
-    icon: Sparkles,
-    title: "Personalised Care Plans",
-    description: "Get custom watering and care schedules for your plants",
+    icon: Bot,
+    title: "Bloom Bot AI",
+    description: "Get instant answers and care plans for your plants",
+    color: "bg-emerald-500/20",
+    iconColor: "text-emerald-500",
   },
   {
-    icon: Calendar,
-    title: "Smart Reminders",
-    description: "Never forget to water your plants again",
+    icon: Sun,
+    title: "Sun Mapper",
+    description: "Visualize sunlight patterns on your property",
+    color: "bg-orange-500/20",
+    iconColor: "text-orange-500",
   },
   {
-    icon: Bug,
-    title: "Pest Diagnosis",
-    description: "Identify and solve plant health issues quickly",
+    icon: Leaf,
+    title: "Green Impact",
+    description: "Calculate your garden's carbon footprint",
+    color: "bg-green-600/20",
+    iconColor: "text-green-600",
   },
   {
-    icon: ShoppingCart,
-    title: "Product Suggestions",
-    description: "Find the perfect plants for your space",
+    icon: FlaskConical,
+    title: "More Coming",
+    description: "New tools are always in development",
+    color: "bg-primary/20",
+    iconColor: "text-primary",
   },
 ];
 
@@ -41,27 +50,27 @@ export function BloomBotTeaser() {
             transition={{ duration: 0.5 }}
           >
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-1.5">
-              <Bot className="h-4 w-4 text-primary" />
+              <FlaskConical className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium text-primary">
-                AI-Powered Assistant
+                Smart Gardening Tools
               </span>
             </div>
 
             <h2 className="font-serif text-3xl font-bold text-garden-dark-foreground sm:text-4xl lg:text-5xl">
-              Meet Bloom Bot
+              Garden Lab
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-garden-dark-foreground/80">
-              Your AI-powered gardening companion that helps you grow healthier,
-              happier plants. Get personalised advice, watering reminders, and
-              expert troubleshooting whenever you need it.
+              Stop guessing. Our suite of digital tools helps you plan with
+              precision, diagnose problems instantly, and track your garden's
+              impact on the planet.
             </p>
 
             <Button size="lg" className="mt-8" asChild>
-              <Link href="/bloom-bot">Try Bloom Bot</Link>
+              <Link href="/garden-lab">Enter Garden Lab</Link>
             </Button>
           </motion.div>
 
-          {/* Features Grid */}
+          {/* Tools Grid */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -69,23 +78,28 @@ export function BloomBotTeaser() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="grid gap-4 sm:grid-cols-2"
           >
-            {features.map((feature, index) => (
+            {tools.map((tool, index) => (
               <motion.div
-                key={feature.title}
+                key={tool.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 className="rounded-xl bg-garden-dark-foreground/5 p-6 backdrop-blur"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20">
-                  <feature.icon className="h-6 w-6 text-primary" />
+                <div
+                  className={cn(
+                    "mb-4 flex h-12 w-12 items-center justify-center rounded-lg",
+                    tool.color
+                  )}
+                >
+                  <tool.icon className={cn("h-6 w-6", tool.iconColor)} />
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-garden-dark-foreground">
-                  {feature.title}
+                  {tool.title}
                 </h3>
                 <p className="mt-2 text-sm text-garden-dark-foreground/70">
-                  {feature.description}
+                  {tool.description}
                 </p>
               </motion.div>
             ))}

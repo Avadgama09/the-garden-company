@@ -34,7 +34,7 @@ const howItWorks = [
     step: "03",
     title: "Get Ongoing Support",
     description:
-      "Use Bloom Bot for personalised advice or reach out to our team whenever you need help.",
+      "Use Garden Lab for personalised advice or reach out to our team whenever you need help.",  // <-- CHANGED
     icon: Heart,
   },
 ];
@@ -79,7 +79,7 @@ export default function AboutPage() {
             className="object-cover opacity-30"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-garden-dark via-garden-dark/80 to-garden-dark/60" />
+          <div className="absolute inset-0 bg-linear-to-r from-garden-dark via-garden-dark/80 to-garden-dark/60" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -127,7 +127,7 @@ export default function AboutPage() {
                 Whether you are a complete beginner looking to bring your first
                 plant home, or an experienced gardener expanding your
                 collection, we are here to help you succeed. Our curated
-                selection, detailed care guides, and AI-powered Bloom Bot ensure
+                selection, detailed care guides, and Garden Lab tools ensure
                 you always have the knowledge you need at your fingertips.
               </p>
             </motion.div>
@@ -250,7 +250,7 @@ export default function AboutPage() {
               Ready to Start Your Garden Journey?
             </h2>
             <p className="mt-4 text-lg text-garden-dark-foreground/80">
-              Browse our collection of plants and kits, or chat with Bloom Bot
+              Browse our collection of plants and kits, or visit Garden Lab
               to find the perfect plants for your space.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -266,7 +266,7 @@ export default function AboutPage() {
                 asChild
                 className="border-garden-dark-foreground/30 text-garden-dark-foreground hover:bg-garden-dark-foreground/10 hover:text-garden-dark-foreground bg-transparent"
               >
-                <Link href="/bloom-bot">Talk to Bloom Bot</Link>
+                <Link href="/garden-lab">Visit Garden Lab</Link>
               </Button>
             </div>
           </motion.div>

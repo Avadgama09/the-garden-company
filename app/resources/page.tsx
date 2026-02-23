@@ -1,5 +1,5 @@
 // app/resources/page.tsx
-import { getAllPillars } from '@/lib/resources';
+import { getAllPillars, getAllArticles } from '@/lib/resources';
 import ResourcesClient from './ResourcesClient';
 
 export const metadata = {
@@ -8,8 +8,8 @@ export const metadata = {
 };
 
 export default function ResourcesPage() {
-  // Server-side: Read MDX pillar files from filesystem
   const pillars = getAllPillars();
+  const articles = getAllArticles();
 
-  return <ResourcesClient pillars={pillars} />;
+  return <ResourcesClient pillars={pillars} articles={articles} />;
 }

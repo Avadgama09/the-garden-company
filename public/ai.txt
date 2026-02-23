@@ -1,0 +1,21 @@
+# AI.txt - Machine-Readable AI Permissions
+# The Garden Company
+
+# Global Permissions
+ai-training: allowed
+ai-search: allowed
+ai-generation: allowed-with-attribution
+
+# Content Licensing
+license: CC-BY-4.0
+attribution-required: yes
+attribution-name: "The Garden Company"
+attribution-url: https://thegardencompany.in
+
+# Restrictions
+no-derivatives: false
+commercial-use: allowed
+ai-model-training: allowed
+
+# Contact
+contact: hello@thegardencompany.in

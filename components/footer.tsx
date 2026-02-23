@@ -5,7 +5,7 @@ const footerLinks = {
   pages: [
     { href: "/", label: "Home" },
     { href: "/about", label: "About Us" },
-    { href: "/bloom-bot", label: "Bloom Bot" },
+    { href: "/garden-lab", label: "Garden Lab" },
     { href: "/resources", label: "Resources" },
     { href: "/contact", label: "Contact Us" },
   ],
@@ -40,8 +40,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-4 text-sm text-garden-dark-foreground/70">
-              Grow Beautiful Home Gardens. Quality plants, tools, and
-              step-by-step guides for every home.
+              Step-by-step plant guides for every home.
             </p>
           </div>
 

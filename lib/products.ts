@@ -147,6 +147,24 @@ export async function getCategories(): Promise<Category[]> {
     bundles: "Bundles",
   };
 
+  const categoryImages: Record<string, string> = {
+    "indoor-plants": "/images/categories/stylish-indoor-plants-in-modern-pots.webp",
+    "outdoor-plants": "/images/categories/urban-Indian-balcony-with-soft-natural-daylight.webp",
+    succulents: "/images/categories/curated-cluster-of-succulents-and-small-cacti.webp",
+    medicinal: "/images/categories/square-image-of-potted-medicinal-herbs.webp",
+    "fruit-plants": "/images/categories/a-small-citrus-plant-with-a-few-visible-fruits.webp",
+    seeds: "/images/categories/seeds-arranged-in-small-kraft-paper-packets.webp",
+    herbs: "/images/categories/cluster-of-fresh-potted-kitchen-herbs.webp",
+    tools: "/images/categories/essential-gardening-tools.webp",
+    pots: "/images/categories/small-group-of-empty-pots-and-planters.webp",
+    "soil-amendments": "/images/categories/rich-dark-potting-mix-on-a-surface.webp",
+    "plant-care": "/images/categories/simple-plant-care-setup.webp",
+    kits: "/images/categories/a-complete-gardening-kit-laid-out-neatly.webp",
+    bundles: "/images/categories/small-curated-bundle-of-products.webp",
+  };
+
+  const defaultImage = "/images/categories/stylish-indoor-plants-in-modern-pots.webp";
+
   const map = new Map<string, Category>();
 
   for (const row of data ?? []) {
@@ -160,8 +178,7 @@ export async function getCategories(): Promise<Category[]> {
         name,
         slug,
         description: `Browse our ${name} collection`,
-        image:
-          "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
+        image: categoryImages[slug] ?? defaultImage,
         productCount: 0,
       });
     }

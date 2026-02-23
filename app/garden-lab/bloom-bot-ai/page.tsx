@@ -134,7 +134,7 @@ export default function BloomBotPage() {
             className="object-cover opacity-20"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-garden-dark via-garden-dark/90 to-garden-dark" />
+          <div className="absolute inset-0 bg-linear-to-b from-garden-dark via-garden-dark/90 to-garden-dark" />
         </div>
 
         {/* Decorative glow */}
@@ -359,7 +359,7 @@ export default function BloomBotPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="flex items-start gap-4 rounded-xl border border-border bg-card p-6"
               >
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/10">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
                   <Zap className="h-5 w-5 text-primary" />
                 </div>
                 <div className="flex-1">

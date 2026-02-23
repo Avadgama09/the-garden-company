@@ -39,7 +39,7 @@ export function HeroSection() {
           </motion.span>
 
           <h1 className="font-serif text-4xl font-bold leading-tight text-garden-dark-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-            <span className="text-balance">Grow Beautiful</span>
+            <span className="text-balance">CODE CODE</span>
             <br />
             <span className="text-primary">Home Gardens</span>
           </h1>
